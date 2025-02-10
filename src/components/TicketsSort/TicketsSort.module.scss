@@ -1,0 +1,29 @@
+.group {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+}
+
+.button {
+    background-color: #ffffff;
+    border: 1px solid #DFE5EC;
+
+    cursor: pointer;
+
+    &:first-of-type {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    &:last-of-type {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    &:hover,&:focus { 
+        background-color: #2196F3;
+        transition: all 0.3s ease-in-out;
+    }
+}
+

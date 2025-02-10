@@ -1,38 +1,39 @@
 .filter {
-    background-color: #ffffff;
-    height: 250px;
-    width: 230px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 8px 0px #0000001A;
-    padding: 20px;
+  background-color: #ffffff;
+  height: 250px;
+  width: 230px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px 0px #0000001a;
+  padding: 20px;
 }
 
 .header {
-    text-transform: uppercase;
-    color: #4a4a4a;
-    margin-block: 0;
+  text-transform: uppercase;
+  color: #4a4a4a;
+  margin-block: 0;
 }
 
 .list {
-    list-style: none;
-    margin-block: 0;
-    padding-inline: 0;
+  list-style: none;
+  margin-block: 0;
+  padding-inline: 0;
 }
 
 .filterLi {
-    color: #4a4a4a;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
+  color: #4a4a4a;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
 
-    &:hover, &:focus {
-        background: #F1FCFF;
-    }   
+  &:hover,
+  &:focus {
+    background: #f1fcff;
+  }
 
-    label {
-        height: 100%;
-        cursor: pointer;
-        flex-grow: 1;
-        align-content: center;
-    }
+  label {
+    height: 100%;
+    cursor: pointer;
+    flex-grow: 1;
+    align-content: center;
+  }
 }

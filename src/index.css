@@ -1,15 +1,15 @@
 body {
-    margin: 0
+  margin: 0;
 }
 
 #root {
-    background-color: #F3F7FA;
-    padding-top: 20px;
+  background-color: #f3f7fa;
+  padding-top: 20px;
 
-    font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }

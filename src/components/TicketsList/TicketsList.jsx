@@ -1,88 +1,38 @@
-import TicketsSort from "../TicketsSort";
-import Ticket from "../Ticket";
+// import TicketsSort from '../TicketsSort'
+// import styles from './TicketsList.module.scss'
+// import Api from '../../services/api'
+// import { useEffect } from 'react'
+// // import Ticket from '../Ticket'
+// // async function getTickets() {
+// //     const api = new Api()
+// //     const id = await api.getSearchID()
+// //     // const tickets = await api.getTickets(id)
+// // }
 
-import styles from "./TicketsList.module.scss";
+// function TicketsList() {
 
-function TicketsList() {
-  const list = [
-    {
-      price: 1200,
-      carrier: "S7",
-      segments: [
-        {
-          origin: "MSC",
-          destination: "CHN",
-          date: "12/01",
-          stops: "1",
-          duration: "17",
-        },
-        {
-          origin: "MSC",
-          destination: "CHN",
-          date: "12/01",
-          stops: "1",
-          duration: "17",
-        },
-      ],
-    },
-    {
-      price: 1200,
-      carrier: "S7",
-      segments: [
-        {
-          origin: "MSC",
-          destination: "CHN",
-          date: "12/01",
-          stops: "1",
-          duration: "17",
-        },
-        {
-          origin: "MSC",
-          destination: "CHN",
-          date: "12/01",
-          stops: "1",
-          duration: "17",
-        },
-      ],
-    },
-    {
-      price: 1200,
-      carrier: "S7",
-      segments: [
-        {
-          origin: "MSC",
-          destination: "CHN",
-          date: "12/01",
-          stops: "1",
-          duration: "17",
-        },
-        {
-          origin: "MSC",
-          destination: "CHN",
-          date: "12/01",
-          stops: "1",
-          duration: "17",
-        },
-      ],
-    },
-  ];
+//   useEffect(()=>{
+//     let fetching = true
 
-  const tickets = list.map((ticket) => {
-    return (
-      <Ticket
-        key={list.indexOf(ticket)}
-        price={ticket.price}
-        carrier={ticket.carrier}
-      />
-    );
-  });
+//     if (fetching){async function fetchData() {
+//       // const tickets = await getTickets()
+//     }
+//     fetchData()
+//   }
+//   return () => fetching = false
 
-  return (
-    <>
-      <TicketsSort />
-      <ul className={styles.list}>{tickets}</ul>
-    </>
-  );
-}
+//   }, [])
 
-export default TicketsList;
+//   // const tickets = list.map((ticket) => {
+//   //   return <Ticket key={list.indexOf(ticket)} price={ticket.price} carrier={ticket.carrier} segments={ticket.segments}/>
+//   // })
+
+//   return (
+//     <>
+//       <TicketsSort />
+//       <ul className={styles.list}>tickets</ul>
+//     </>
+//   )
+// }
+
+// export default TicketsList

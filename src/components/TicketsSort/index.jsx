@@ -1,3 +1,3 @@
-import TicketsSort from "./TicketsSort";
+import TicketsSort from './TicketsSort';
 
 export default TicketsSort;

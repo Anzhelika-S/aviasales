@@ -1,4 +1,4 @@
-import styles from "./TicketsSort.module.scss";
+import styles from './TicketsSort.module.scss';
 
 function TicketsSort() {
   return (

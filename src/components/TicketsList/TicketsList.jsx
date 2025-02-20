@@ -1,38 +1,32 @@
-// import TicketsSort from '../TicketsSort'
-// import styles from './TicketsList.module.scss'
-// import Api from '../../services/api'
-// import { useEffect } from 'react'
-// // import Ticket from '../Ticket'
-// // async function getTickets() {
-// //     const api = new Api()
-// //     const id = await api.getSearchID()
-// //     // const tickets = await api.getTickets(id)
-// // }
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-// function TicketsList() {
+import Ticket from '../Ticket';
+import TicketsSort from '../TicketsSort';
+import { loadTickets } from '../../reducers/ticketsReducer';
 
-//   useEffect(()=>{
-//     let fetching = true
+import styles from './TicketsList.module.scss';
 
-//     if (fetching){async function fetchData() {
-//       // const tickets = await getTickets()
-//     }
-//     fetchData()
-//   }
-//   return () => fetching = false
+function TicketsList() {
+  const list = useSelector((state) => state.tickets.tickets);
+  const dispatch = useDispatch();
 
-//   }, [])
+  useEffect(() => {
+    dispatch(loadTickets());
+  }, []);
 
-//   // const tickets = list.map((ticket) => {
-//   //   return <Ticket key={list.indexOf(ticket)} price={ticket.price} carrier={ticket.carrier} segments={ticket.segments}/>
-//   // })
+  const tickets = list.map((ticket) => {
+    return (
+      <Ticket key={list.indexOf(ticket)} price={ticket.price} carrier={ticket.carrier} segments={ticket.segments} />
+    );
+  });
 
-//   return (
-//     <>
-//       <TicketsSort />
-//       <ul className={styles.list}>tickets</ul>
-//     </>
-//   )
-// }
+  return (
+    <>
+      <TicketsSort />
+      <ul className={styles.list}>{tickets}</ul>
+    </>
+  );
+}
 
-// export default TicketsList
+export default TicketsList;

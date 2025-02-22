@@ -1,6 +1,7 @@
-import { onError } from "./errorReducer";
-import { onLoadingOff } from "./loadingReducer";
-import uniqid from 'uniqid'
+import uniqid from 'uniqid';
+
+import { onError } from './errorReducer';
+import { onLoadingOff } from './loadingReducer';
 
 const initialState = {
   tickets: [],
@@ -8,53 +9,49 @@ const initialState = {
 
 export const LOAD_TICKETS = 'LOAD_TICKETS';
 
-export const loadTickets = () => {  
+export const loadTickets = () => {
   return async (dispatch) => {
     try {
-      let stop = false 
-      let errors = 0
+      let stop = false;
+      let errors = 0;
 
-      const res = await fetch('https://aviasales-test-api.kata.academy/search')
-      const {searchId} = await res.json()
-        
+      const res = await fetch('https://aviasales-test-api.kata.academy/search');
+      const { searchId } = await res.json();
 
-     while (!stop) {
-      try {
-        const ticketsRes = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
+      while (!stop) {
+        try {
+          const ticketsRes = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`);
 
-        if(!ticketsRes.ok) {
-          errors++
+          if (!ticketsRes.ok) {
+            errors++;
+          }
+
+          const data = await ticketsRes.json();
+          const newTickets = data.tickets.map((ticket) => ({
+            ...ticket,
+            id: uniqid(),
+          }));
+
+          stop = data.stop;
+
+          dispatch({
+            type: LOAD_TICKETS,
+            tickets: newTickets,
+          });
+        } catch (err) {
+          if (errors === 5) {
+            stop = true;
+            dispatch(onError());
+            dispatch(onLoadingOff());
+          }
+          await new Promise((resolve) => setTimeout(resolve, 2000));
         }
-
-        const data = await ticketsRes.json()
-        const newTickets = data.tickets.map(ticket => ({
-          ...ticket,
-          id: uniqid()
-        }))
-
-        stop = data.stop
-        
-        dispatch({
-        type: LOAD_TICKETS,
-        tickets: newTickets,
-      });
-
-      } catch (err) {
-        if(errors === 5) {
-          stop = true
-          dispatch(onError())
-          dispatch(onLoadingOff())
-        }
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } 
-       
-    } 
+      }
     } catch (err) {
-        dispatch(onError())
-          dispatch(onLoadingOff())
-
+      dispatch(onError());
+      dispatch(onLoadingOff());
     } finally {
-      dispatch(onLoadingOff())
+      dispatch(onLoadingOff());
     }
   };
 };
@@ -64,7 +61,7 @@ export const ticketsReducer = (state = initialState, action) => {
     case LOAD_TICKETS:
       return {
         ...state,
-        tickets: [...state.tickets, ...action.tickets]
+        tickets: [...state.tickets, ...action.tickets],
       };
     default:
       return state;

@@ -13,7 +13,7 @@ function TicketsList() {
   const error = useSelector((state) => state.error.error);
   const loading = useSelector((state) => state.loading.loading);
   const dispatch = useDispatch();
-  const [visibleTickets, setVisibleTickets] = useState(20);
+  const [visibleTickets, setVisibleTickets] = useState(10);
 
   useEffect(() => {
     dispatch(loadTickets());
@@ -23,19 +23,13 @@ function TicketsList() {
     console.log(window.innerHeight, window.scrollY, document.body.offsetHeight);
 
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-      setVisibleTickets((prev) => {
-        console.log('Видимые билеты:', visibleTickets);
-
-        return prev + 20;
-      });
+      setVisibleTickets((prev) => prev + 10);
     }
   });
 
   useEffect(() => {
-    console.log(handleScroll);
-
     window.addEventListener('scroll', handleScroll);
-    return window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
   const tickets = list.slice(0, visibleTickets).map((ticket) => {

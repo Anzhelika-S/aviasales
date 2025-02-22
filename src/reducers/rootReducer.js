@@ -11,5 +11,5 @@ export const rootReducer = combineReducers({
   filter: filterReducer,
   tickets: ticketsReducer,
   error: errorReducer,
-  loading: loadingReducer
+  loading: loadingReducer,
 });

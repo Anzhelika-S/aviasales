@@ -1,5 +1,5 @@
 const initialState = {
-  sort: 'fastest',
+  sort: 'cheapest',
 };
 
 export const SET_SORT = 'SET_SORT';

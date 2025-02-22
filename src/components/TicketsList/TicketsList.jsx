@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spin, Flex, Alert } from 'antd';
+import { orderBy } from 'lodash';
 
 import Ticket from '../Ticket';
 import TicketsSort from '../TicketsSort';
@@ -12,7 +13,7 @@ function TicketsList() {
   const list = useSelector((state) => state.tickets.tickets);
   const error = useSelector((state) => state.error.error);
   const loading = useSelector((state) => state.loading.loading);
-  // const sort = useSelector((state) => state.sort.sort)
+  const sort = useSelector((state) => state.sort.sort);
   const filter = useSelector((state) => state.filter.filters);
   const dispatch = useDispatch();
   const [visibleTickets, setVisibleTickets] = useState(10);
@@ -66,7 +67,19 @@ function TicketsList() {
     }
   });
 
-  const tickets = filteredList.slice(0, visibleTickets).map((ticket) => {
+  const sortedList =
+    sort === 'optimal'
+      ? orderBy(filteredList, ['price', 'segments[0].duration'], ['asc', 'asc'])
+      : filteredList.sort((a, b) => {
+          switch (sort) {
+            case 'cheapest':
+              return a.price - b.price;
+            case 'fastest':
+              return a.segments[0].duration - b.segments[0].duration;
+          }
+        });
+
+  const tickets = sortedList.slice(0, visibleTickets).map((ticket) => {
     return <Ticket key={ticket.id} price={ticket.price} carrier={ticket.carrier} segments={ticket.segments} />;
   });
 

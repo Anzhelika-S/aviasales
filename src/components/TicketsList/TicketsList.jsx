@@ -12,6 +12,8 @@ function TicketsList() {
   const list = useSelector((state) => state.tickets.tickets);
   const error = useSelector((state) => state.error.error);
   const loading = useSelector((state) => state.loading.loading);
+  // const sort = useSelector((state) => state.sort.sort)
+  const filter = useSelector((state) => state.filter.filters);
   const dispatch = useDispatch();
   const [visibleTickets, setVisibleTickets] = useState(10);
 
@@ -20,8 +22,6 @@ function TicketsList() {
   }, [dispatch]);
 
   const handleScroll = useCallback(() => {
-    console.log(window.innerHeight, window.scrollY, document.body.offsetHeight);
-
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
       setVisibleTickets((prev) => prev + 10);
     }
@@ -32,7 +32,41 @@ function TicketsList() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  const tickets = list.slice(0, visibleTickets).map((ticket) => {
+  const filteredList = list.filter((ticket) => {
+    if (filter.length === 4) {
+      return ticket;
+    }
+
+    if (filter.includes('direct')) {
+      if (ticket.segments[0].stops.length === 0 || ticket.segments[1].stops.length === 0) {
+        return ticket;
+      }
+    }
+
+    if (filter.includes('one-stop')) {
+      if (ticket.segments[0].stops.length === 1 || ticket.segments[1].stops.length === 1) {
+        return ticket;
+      }
+    }
+
+    if (filter.includes('two-stops')) {
+      if (ticket.segments[0].stops.length === 2 || ticket.segments[1].stops.length === 2) {
+        return ticket;
+      }
+    }
+
+    if (filter.includes('three-stops')) {
+      if (ticket.segments[0].stops.length === 3 || ticket.segments[1].stops.length === 3) {
+        return ticket;
+      }
+    }
+
+    if (filter.length === 0) {
+      return undefined;
+    }
+  });
+
+  const tickets = filteredList.slice(0, visibleTickets).map((ticket) => {
     return <Ticket key={ticket.id} price={ticket.price} carrier={ticket.carrier} segments={ticket.segments} />;
   });
 
@@ -44,6 +78,12 @@ function TicketsList() {
           style={{ marginTop: 10, textAlign: 'center', padding: 20 }}
           type="error"
           message="Что-то пошло не так... Перезагрузите страницу."
+        />
+      ) : filteredList.length === 0 ? (
+        <Alert
+          style={{ marginTop: 10, textAlign: 'center', padding: 20 }}
+          type="info"
+          message="Рейсов, подходящих под заданные фильтры, не найдено"
         />
       ) : (
         <ul className={styles.list}>{tickets}</ul>

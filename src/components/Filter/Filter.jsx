@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Checkbox } from 'antd';
 
 import { toggleAllFilters, toggleFilter } from '../../reducers/filterReducer';
 
@@ -17,64 +18,49 @@ function Filter() {
       <h3 className={styles.header}>Количество пересадок</h3>
       <ul className={styles.list}>
         <li className={styles.filterLi}>
-          <label htmlFor="all">
-            <input
-              type="checkbox"
-              name="filter-checkbox"
-              id="all"
-              checked={allSelected}
-              onChange={() => dispatch(toggleAllFilters(allFilters))}
-            />
-            <span>Все</span>
-          </label>
+          <Checkbox
+            checked={allSelected}
+            onChange={() => dispatch(toggleAllFilters(allFilters))}
+            style={{ alignItems: 'center' }}
+          >
+            Все
+          </Checkbox>
         </li>
         <li className={styles.filterLi}>
-          <label htmlFor="direct">
-            <input
-              type="checkbox"
-              name="filter-checkbox"
-              id="direct"
-              checked={selectedFilters.includes('direct')}
-              onChange={() => dispatch(toggleFilter('direct'))}
-            />
-            <span>Без пересадок</span>
-          </label>
+          <Checkbox
+            checked={selectedFilters.includes('direct')}
+            onChange={() => dispatch(toggleFilter('direct'))}
+            style={{ alignItems: 'center' }}
+          >
+            Без пересадок
+          </Checkbox>
         </li>
         <li className={styles.filterLi}>
-          <label htmlFor="one-overlay">
-            <input
-              type="checkbox"
-              name="filter-checkbox"
-              id="one-stop"
-              checked={selectedFilters.includes('one-stop')}
-              onChange={() => dispatch(toggleFilter('one-stop'))}
-            />
-            <span>1 пересадка</span>
-          </label>
+          <Checkbox
+            checked={selectedFilters.includes('one-stop')}
+            onChange={() => dispatch(toggleFilter('one-stop'))}
+            style={{ alignItems: 'center' }}
+          >
+            1 пересадка
+          </Checkbox>
         </li>
         <li className={styles.filterLi}>
-          <label htmlFor="two-overlays">
-            <input
-              type="checkbox"
-              name="filter-checkbox"
-              id="two-stops"
-              checked={selectedFilters.includes('two-stops')}
-              onChange={() => dispatch(toggleFilter('two-stops'))}
-            />
-            <span>2 пересадки</span>
-          </label>
+          <Checkbox
+            checked={selectedFilters.includes('two-stops')}
+            onChange={() => dispatch(toggleFilter('two-stops'))}
+            style={{ alignItems: 'center' }}
+          >
+            2 пересадки
+          </Checkbox>
         </li>
         <li className={styles.filterLi}>
-          <label htmlFor="three-overlays">
-            <input
-              type="checkbox"
-              name="filter-checkbox"
-              id="three-stops"
-              checked={selectedFilters.includes('three-stops')}
-              onChange={() => dispatch(toggleFilter('three-stops'))}
-            />
-            <span>3 пересадки</span>
-          </label>
+          <Checkbox
+            checked={selectedFilters.includes('three-stops')}
+            onChange={() => dispatch(toggleFilter('three-stops'))}
+            style={{ alignItems: 'center' }}
+          >
+            3 пересадки
+          </Checkbox>
         </li>
       </ul>
     </aside>

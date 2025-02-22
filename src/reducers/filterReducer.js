@@ -1,5 +1,5 @@
 const initialState = {
-  filters: [],
+  filters: ['direct', 'one-stop', 'two-stops', 'three-stops'],
 };
 
 export const TOGGLE_FILTER = 'TOGGLE_FILTER';
